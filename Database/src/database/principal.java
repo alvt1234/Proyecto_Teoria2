@@ -991,9 +991,9 @@ public class principal extends javax.swing.JFrame {
             frameuser.setSize(610, 470);
             txtport.setText("5432");
             txturl.setText("jdbc:postgresql://localhost:5432/postgres");
-            txtdatabase.setText("");
-            txtuser.setText("");
-            txtpassword.setText("");
+            txtdatabase.setText("pancitopg");
+            txtuser.setText("postgres");
+            txtpassword.setText("clave123");
             ismariaDB = false;
         });
 
