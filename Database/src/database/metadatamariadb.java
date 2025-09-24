@@ -8,11 +8,10 @@ import java.util.List;
 public class metadatamariadb {
 
     private final List<String> foreignKeys = new ArrayList<>();
-
+   
     public metadatamariadb(Connection mariadb, Connection postgres) throws SQLException {
         DatabaseMetaData meta = mariadb.getMetaData();
         ResultSet tablas = meta.getTables(null, null, "%", new String[]{"TABLE"});
-
         while (tablas.next()) {
             String nombretabla = tablas.getString("TABLE_NAME");
 
@@ -46,6 +45,13 @@ public class metadatamariadb {
             } catch (Exception e) {
                 System.out.println("Error en foreign key: " + e.getMessage());
             }
+        }
+
+        // Migrar vistas después de las tablas
+        try {
+            new VistaMigrator(mariadb, postgres);
+        } catch (Exception e) {
+            System.out.println("Error durante la migración de vistas: " + e.getMessage());
         }
     }
 
